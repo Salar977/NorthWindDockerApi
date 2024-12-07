@@ -1,0 +1,49 @@
+# Ignore .idea folder (for JetBrains IDEs like Rider)
+.idea/
+
+# Ignore appsettings files
+appsettings.*
+
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Rider / JetBrains specific files
+*.sln.iml
+
+# Ignore temporary files
+*.vs/
+.vscode/
+
+# Ignore other unneeded files
+*.log
+*.tmp
+
+# Ignore lock and package files that shouldn't be tracked
+project.lock.json
+project.fragment.lock.json
+
+# Ignore compiled files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.pyc
+*.class
+*.jar
+
+# Ignore auto-generated files by Visual Studio
+_ReSharper*/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore environment-specific configuration
+.env
