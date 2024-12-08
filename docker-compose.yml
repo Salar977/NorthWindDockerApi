@@ -1,6 +1,19 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
 
 services:
+
+  nginx:
+    container_name: nginx
+    build:
+      context: Docker/Nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - northwinddockerapi
+    networks:
+      - network
+    ports:
+     - 80:81
+
   northwinddockerapi:
     image: northwinddockerapi
     container_name: northwindapi
