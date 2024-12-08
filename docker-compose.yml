@@ -1,0 +1,45 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+services:
+  northwinddockerapi:
+    image: northwinddockerapi
+    container_name: northwindapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver2022;Database=NorthwindDb;User Id=sa;Password=Password12345!;TrustServerCertificate=True;
+    depends_on:
+      - sqlserver
+    networks:
+      - network
+    
+  
+  sqlserver:
+    build:
+      context: Docker/SQLServer
+      dockerfile: ./Dockerfile
+    container_name: sqlserver2022
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password12345!"
+    ports:
+      - 1433:1433
+    volumes:
+      - db-data:/var/opt/mssql
+    networks:
+      - network
+    
+  
+
+
+volumes:
+  db-data:
+
+
+networks:
+  network:
+    driver: bridge
