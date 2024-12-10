@@ -11,7 +11,6 @@ The API is built using ASP.NET Core, MS SQLServer 2022, Nginx and Docker.
 - **SQL Server**: Stores data in the Northwind database inside a Docker container.
 - **Nginx**: Acts as a reverse proxy, routing requests to the API and serving static content.
 
-**Note**: For now, this project only exposes 1 health check and 1 endpoint.
 
 ## Requirements
 
@@ -37,3 +36,4 @@ The API is built using ASP.NET Core, MS SQLServer 2022, Nginx and Docker.
    Nginx Page: http://localhost/
    Health endpoint: http://localhost/health/
    Customers endpoint: http://localhost/customers/
+   Customer by id: http://localhost/customers/<customerId>
