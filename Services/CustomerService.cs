@@ -15,4 +15,11 @@ public class CustomerService(NorthwindDbContext dbContext) : ICustomerService
             .AsNoTracking()
             .ToListAsync();
     }
+
+    public async Task<Customer> GetCustomersByIdAsync(string customerId)
+    {
+        var customer = await dbContext.Customers.Where(c => c.CustomerID.Contains(customerId)).FirstOrDefaultAsync();
+        if(customer is null) return null!;
+        return customer;
+    }
 }
