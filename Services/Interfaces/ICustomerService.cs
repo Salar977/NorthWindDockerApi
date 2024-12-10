@@ -5,4 +5,5 @@ namespace NorthWindDockerApi.Services.Interfaces;
 public interface ICustomerService
 {
     Task<IEnumerable<Customer>> GetCustomersAsync(int page, int pageSize);
+    Task<Customer> GetCustomersByIdAsync(string customerId);
 }
