@@ -5,19 +5,17 @@ FROM mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-20.04
 ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=Password12345!
 
-# Create directories for backups and scripts
-RUN mkdir -p /var/opt/mssql/backups /var/opt/mssql/scripts
+# Switch to root user
+USER root
+RUN mkdir -p /usr/src/app
 
-# Copy the .bak file into the container
-COPY *.bak /var/opt/mssql/backups/
+COPY *.bak /usr/src/app/backups/
+COPY restore.sql /usr/src/app/
+COPY entrypoint.sh /usr/src/app/
 
-# Copy the restore script into the container
-COPY restore.sql /var/opt/mssql/scripts/
+RUN chmod +x /usr/src/app/entrypoint.sh
 
-# Expose SQL Server's default port
+USER mssql
 EXPOSE 1433
 
-# Start SQL Server and execute the restore script, then keep SQL Server running in the foreground
-CMD /opt/mssql/bin/sqlservr & \
-    /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -i /var/opt/mssql/scripts/restore.sql && \
-    tail -f /dev/null
+CMD ["/usr/src/app/entrypoint.sh"]
